@@ -1,0 +1,210 @@
+﻿<Window x:Class="SAaMS_LW1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SAaMS_LW1"
+        xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
+        xmlns:vms="clr-namespace:SAaMS_LW1.ViewModels"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        FontFamily="{materialDesign:MaterialDesignFont}"
+        mc:Ignorable="d"
+        Title="Генератор Лемера" Height="650" Width="900">
+    <Window.DataContext>
+        <vms:ChartViewModel/>
+    </Window.DataContext>
+    
+    <Grid Margin="16" HorizontalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <materialDesign:Card 
+            Grid.Row="0"
+            Padding="16 16" 
+            Height="Auto"
+            UniformCornerRadius="8">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                
+                <Grid VerticalAlignment="Center" Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBox 
+                        x:Name="tbParamA"
+                        Style="{DynamicResource MaterialDesignOutlinedTextBox}"
+                        Grid.Row="0"
+                        Margin="0 0 0 6"
+                        Padding="10"
+                        PreviewTextInput="FloatNumberValidation"
+                        materialDesign:HintAssist.Hint="Введите a">
+                    </TextBox>
+                    <TextBox 
+                        x:Name="tbParamR0"
+                        Style="{DynamicResource MaterialDesignOutlinedTextBox}"
+                        Margin="0 6"
+                        Grid.Row="1"
+                        Padding="10"
+                        PreviewTextInput="FloatNumberValidation"
+                        materialDesign:HintAssist.Hint="Введите R0">
+                    </TextBox>
+                    <TextBox 
+                        x:Name="tbParamM"
+                        Style="{DynamicResource MaterialDesignOutlinedTextBox}"
+                        Grid.Row="2"
+                        Margin="0 6 0 0"
+                        Padding="10"
+                        PreviewTextInput="FloatNumberValidation"
+                        materialDesign:HintAssist.Hint="Введите m">
+                    </TextBox>
+                </Grid>
+
+                <Separator
+                    Grid.Column="1"
+                    HorizontalAlignment="Left"
+                    Style="{StaticResource MaterialDesignDarkSeparator}"
+                    Margin="8 0 8 0">
+                    <Separator.LayoutTransform>
+                        <RotateTransform Angle="90" />
+                    </Separator.LayoutTransform>
+                </Separator>
+
+                <Grid VerticalAlignment="Center" Grid.Column="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    
+                    <TextBlock 
+                        Style="{DynamicResource MaterialDesignTextBlock}"
+                        Grid.Column="0"
+                        Grid.Row="0"
+                        Margin="0 0 0 4"
+                        Text="Математическое ожидание (m)">
+                    </TextBlock>
+                    <TextBlock
+                        x:Name="tbExpectedValue"
+                        Style="{DynamicResource MaterialDesignTextBlock}"
+                        Grid.Column="2"
+                        Grid.Row="0"
+                        FontWeight="Bold"
+                        Margin="0 0 0 4">
+                    </TextBlock>
+                    <TextBlock 
+                        Style ="{DynamicResource MaterialDesignTextBlock}"
+                        Margin="0 4"
+                        Grid.Column="0"
+                        Grid.Row="1"
+                        Text="Дисперсия (D)">
+                    </TextBlock>
+                    <TextBlock
+                        x:Name="tbDispersion"
+                        Style="{DynamicResource MaterialDesignTextBlock}"
+                        FontWeight="Bold"
+                        Margin="0 4"
+                        Grid.Row="1"
+                        Grid.Column="2">
+                    </TextBlock>
+                    <TextBlock 
+                        Style="{DynamicResource MaterialDesignTextBlock}"
+                        Text="Среднеквадратическое отклонение (σ)"
+                        Margin="0 4"
+                        Grid.Column="0"
+                        Grid.Row="2">
+                    </TextBlock>
+                    <TextBlock
+                        x:Name="tbStandartDeviation"
+                        Style="{DynamicResource MaterialDesignTextBlock}"
+                        FontWeight="Bold"
+                        Grid.Row="2"
+                        Grid.Column="2"
+                        Margin="0 4">
+                    </TextBlock>
+                    <TextBlock 
+                        Style="{DynamicResource MaterialDesignTextBlock}"
+                        Text="Период"
+                        Margin="0 4"
+                        Grid.Column="0"
+                        Grid.Row="3">
+                    </TextBlock>
+                    <TextBlock
+                        x:Name="tbPeriod"
+                        Style="{DynamicResource MaterialDesignTextBlock}"
+                        FontWeight="Bold"
+                        Grid.Row="3"
+                        Grid.Column="2"
+                        Margin="0 4">
+                    </TextBlock>
+                    <TextBlock 
+                        Style="{DynamicResource MaterialDesignTextBlock}"
+                        Text="Апериодичность"
+                        Margin="0 4 0 0"
+                        Grid.Column="0"
+                        Grid.Row="4">
+                    </TextBlock>
+                    <TextBlock
+                        x:Name="tbAperiodical"
+                        Style="{DynamicResource MaterialDesignTextBlock}"
+                        FontWeight="Bold"
+                        Grid.Row="4"
+                        Grid.Column="2"
+                        Margin="0 4 0 0">
+                    </TextBlock>
+                </Grid>
+
+                <Button 
+                    x:Name="btnGenerate"
+                    Grid.Column="3"
+                    Content="Сгенерировать"
+                    Margin="0 8" 
+                    Width="150"
+                    HorizontalAlignment="Right"
+                    Click="ButtonGenerate_Click">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MaterialDesignRaisedButton}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Text.Length, ElementName=tbParamA, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Text.Length, ElementName=tbParamR0, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Text.Length, ElementName=tbParamM, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </Grid>
+        </materialDesign:Card>
+        <lvc:CartesianChart
+            Margin="0 16 0 0"
+            Series="{Binding Series}"
+            XAxes="{Binding XAxes}"
+            YAxes="{Binding YAxes}"
+            Grid.Row="1">
+        </lvc:CartesianChart>
+    </Grid>
+</Window>
