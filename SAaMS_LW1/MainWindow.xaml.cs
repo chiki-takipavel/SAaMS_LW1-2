@@ -26,19 +26,22 @@ namespace SAaMS_LW1
             int r0 = int.Parse(tbParamR0.Text, CultureInfo.CurrentCulture);
             int m = int.Parse(tbParamM.Text, CultureInfo.CurrentCulture);
 
+            btnGenerate.IsEnabled = false;
             LehmerSequence sequence = new(a, r0, m);
             IEnumerable<double> sequenceValue = await Task.Run(() => sequence.ProvideSequence());
-            StatisticsGeneration statistics = new(sequenceValue);
+            btnGenerate.IsEnabled = true;
 
+            StatisticsGeneration statistics = new(sequenceValue);
             tbExpectedValue.Text = statistics.GetExpectedValue().ToString(CultureInfo.CurrentCulture);
             tbDispersion.Text = statistics.GetDispersion().ToString(CultureInfo.CurrentCulture);
             tbStandartDeviation.Text = statistics.GetStandartDeviation().ToString(CultureInfo.CurrentCulture);
             tbPeriod.Text = statistics.GetPeriod().ToString(CultureInfo.CurrentCulture);
             tbCheck.Text = statistics.GetChecked().ToString(CultureInfo.CurrentCulture);
 
-            var chart = (ChartViewModel)DataContext;
+            ChartViewModel chart = (ChartViewModel)DataContext;
             chart.CreateChart(statistics.GetDistribution());
 
+            await Task.Delay(1500);
             statistics.ShowValues();
         }
 

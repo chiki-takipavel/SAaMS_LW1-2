@@ -97,23 +97,22 @@ namespace SAaMS_LW1.Helpers
         {
             try
             {
-                using StreamWriter streamWriter = new(filePath);
-                foreach (double value in randomSequence)
+                using (StreamWriter streamWriter = new(filePath))
                 {
-                    streamWriter.WriteLine(Convert.ToString(value));
+                    foreach (double value in randomSequence)
+                    {
+                        streamWriter.WriteLine(Convert.ToString(value));
+                    }
                 }
+
+                Process process = new();
+                process.StartInfo.FileName = filePath;
+                process.StartInfo.UseShellExecute = true;
+                _ = process.Start();
             }
             catch
             {
                 _ = MessageBox.Show("Please, close Excel file.");
-            }
-
-            Process process = new();
-            process.StartInfo.FileName = filePath;
-            process.StartInfo.UseShellExecute = true;
-            if (!process.Start())
-            {
-                _ = MessageBox.Show("Cannot open Excel.");
             }
         }
     }
