@@ -13,7 +13,7 @@
         TextElement.FontSize="14"
         FontFamily="{materialDesign:MaterialDesignFont}"
         mc:Ignorable="d"
-        Title="Генератор Лемера" Height="650" Width="900">
+        Title="Генератор случайных величин" Height="650" Width="900">
     <Window.DataContext>
         <vms:ChartViewModel/>
     </Window.DataContext>
@@ -158,13 +158,13 @@
                     </TextBlock>
                     <TextBlock 
                         Style="{DynamicResource MaterialDesignTextBlock}"
-                        Text="Апериодичность"
+                        Text="Проверка"
                         Margin="0 4 0 0"
                         Grid.Column="0"
                         Grid.Row="4">
                     </TextBlock>
                     <TextBlock
-                        x:Name="tbAperiodical"
+                        x:Name="tbCheck"
                         Style="{DynamicResource MaterialDesignTextBlock}"
                         FontWeight="Bold"
                         Grid.Row="4"

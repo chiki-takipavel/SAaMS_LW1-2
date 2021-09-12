@@ -34,10 +34,12 @@ namespace SAaMS_LW1
             tbDispersion.Text = statistics.GetDispersion().ToString(CultureInfo.CurrentCulture);
             tbStandartDeviation.Text = statistics.GetStandartDeviation().ToString(CultureInfo.CurrentCulture);
             tbPeriod.Text = statistics.GetPeriod().ToString(CultureInfo.CurrentCulture);
-            tbAperiodical.Text = statistics.GetChecked().ToString(CultureInfo.CurrentCulture);
+            tbCheck.Text = statistics.GetChecked().ToString(CultureInfo.CurrentCulture);
 
             var chart = (ChartViewModel)DataContext;
             chart.CreateChart(statistics.GetDistribution());
+
+            statistics.ShowValues();
         }
 
         private void FloatNumberValidation(object sender, TextCompositionEventArgs e)

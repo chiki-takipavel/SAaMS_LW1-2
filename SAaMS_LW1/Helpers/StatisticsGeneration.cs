@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Windows;
 
 namespace SAaMS_LW1.Helpers
 {
     public class StatisticsGeneration
     {
         private const int groupsNumber = 20;
-        private readonly List<double> randomSequence;
+        private const string filePath = "values.csv";
 
-        //StreamWriter sw;
-        //private string pathname = "rs.csv";
+        private readonly List<double> randomSequence;
 
         public StatisticsGeneration(IEnumerable<double> randomSequence)
         {
@@ -92,24 +93,22 @@ namespace SAaMS_LW1.Helpers
             return (double)temp / randomSequence.Count;
         }
 
-        /*public void ShowResults()
+        public void ShowValues()
         {
-            try
+            using (StreamWriter streamWriter = new(filePath))
             {
-                sw = new StreamWriter(pathname);
-                foreach (double tmp in randomSequence)
+                foreach (double value in randomSequence)
                 {
-                    sw.WriteLine(Convert.ToString(tmp));
+                    streamWriter.WriteLine(Convert.ToString(value));
                 }
-                sw.Close();
-                System.Diagnostics.Process p = new System.Diagnostics.Process();
-                p.StartInfo.FileName = pathname;
-                p.Start();
             }
-            catch
+
+            Process p = new();
+            p.StartInfo.FileName = filePath;
+            if (!p.Start())
             {
-                MessageBox.Show("Close Excel!!!");
+                _ = MessageBox.Show("Cannot open Excel.");
             }
-        }*/
+        }
     }
 }
