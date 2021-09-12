@@ -95,17 +95,23 @@ namespace SAaMS_LW1.Helpers
 
         public void ShowValues()
         {
-            using (StreamWriter streamWriter = new(filePath))
+            try
             {
+                using StreamWriter streamWriter = new(filePath);
                 foreach (double value in randomSequence)
                 {
                     streamWriter.WriteLine(Convert.ToString(value));
                 }
             }
+            catch
+            {
+                _ = MessageBox.Show("Please, close Excel file.");
+            }
 
-            Process p = new();
-            p.StartInfo.FileName = filePath;
-            if (!p.Start())
+            Process process = new();
+            process.StartInfo.FileName = filePath;
+            process.StartInfo.UseShellExecute = true;
+            if (!process.Start())
             {
                 _ = MessageBox.Show("Cannot open Excel.");
             }
