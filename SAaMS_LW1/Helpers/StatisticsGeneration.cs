@@ -75,7 +75,7 @@ namespace SAaMS_LW1.Helpers
 
         public int GetPeriod()
         {
-            return randomSequence.Count - randomSequence.IndexOf(randomSequence.Count - 1) - 1;
+            return randomSequence.Count;
         }
 
         public double GetChecked()

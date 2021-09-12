@@ -6,11 +6,11 @@ namespace SAaMS_LW1.Helpers
     {
         private readonly int paramA;
         private readonly int paramM;
-        private int previousR;
+        private double previousR;
 
-        public LehmerRandom(int paramA, int paramR0, int paramM)
+        public LehmerRandom(int paramA, double paramR0, int paramM)
         {
-            if (paramR0 <= 0 || paramR0 == int.MaxValue)
+            if (paramR0 is <= 0 or int.MaxValue)
             {
                 throw new ArgumentException("Bad seed.");
             }
@@ -22,7 +22,7 @@ namespace SAaMS_LW1.Helpers
 
         public double Next()
         {
-            int currentR = paramA * previousR % paramM;
+            double currentR = paramA * previousR % paramM;
             double temp = paramA * previousR * 1d / paramM;
             previousR = currentR;
             return temp - Math.Floor(temp);
