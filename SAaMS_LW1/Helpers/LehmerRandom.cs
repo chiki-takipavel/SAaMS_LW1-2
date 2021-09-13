@@ -23,9 +23,8 @@ namespace SAaMS_LW1.Helpers
         public double Next()
         {
             double currentR = paramA * previousR % paramM;
-            double temp = paramA * previousR * 1d / paramM;
             previousR = currentR;
-            return temp - Math.Floor(temp);
+            return currentR / paramM;
         }
     }
 }

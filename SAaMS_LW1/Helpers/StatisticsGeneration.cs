@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -101,7 +102,7 @@ namespace SAaMS_LW1.Helpers
                 {
                     foreach (double value in randomSequence)
                     {
-                        streamWriter.WriteLine(Convert.ToString(value));
+                        streamWriter.WriteLine(Convert.ToString(value, CultureInfo.CurrentCulture));
                     }
                 }
 
@@ -112,7 +113,7 @@ namespace SAaMS_LW1.Helpers
             }
             catch
             {
-                _ = MessageBox.Show("Please, close Excel file.");
+                throw new IOException("Please, close Excel.");
             }
         }
     }
