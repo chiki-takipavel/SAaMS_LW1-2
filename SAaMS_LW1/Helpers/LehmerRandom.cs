@@ -1,8 +1,9 @@
-﻿using System;
+﻿using SAaMS_LW1.Helpers.Interfaces;
+using System;
 
 namespace SAaMS_LW1.Helpers
 {
-    public class LehmerRandom
+    public class LehmerRandom : IRandom
     {
         private readonly int paramA;
         private readonly int paramM;
@@ -20,7 +21,7 @@ namespace SAaMS_LW1.Helpers
             this.paramM = paramM;
         }
 
-        public double Next()
+        public double NextValue()
         {
             double currentR = paramA * previousR % paramM;
             previousR = currentR;

@@ -1,33 +1,29 @@
-﻿using SAaMS_LW1.Helpers;
+﻿using SAaMS_LW1.Helpers.Interfaces;
+using SAaMS_LW1.Sequences.Interfaces;
 using System.Collections.Generic;
 
 namespace SAaMS_LW1.Sequences
 {
     public class LehmerSequence : ISequence
     {
-        private readonly int paramA;
-        private readonly int paramM;
-        private readonly int paramR0;
+        private readonly IRandom random;
 
         private readonly List<double> randomSequence = new();
 
-        public LehmerSequence(int paramA, int paramR0, int paramM)
+        public LehmerSequence(IRandom random)
         {
-            this.paramA = paramA;
-            this.paramR0 = paramR0;
-            this.paramM = paramM;
+            this.random = random;
         }
 
         public IEnumerable<double> ProvideSequence()
         {
-            LehmerRandom random = new(paramA, paramR0, paramM);
-            randomSequence.Add(random.Next());
-            double temp = random.Next();
+            randomSequence.Add(random.NextValue());
+            double temp = random.NextValue();
 
             while (!randomSequence.Contains(temp))
             {
                 randomSequence.Add(temp);
-                temp = random.Next();
+                temp = random.NextValue();
             }
 
             return randomSequence;

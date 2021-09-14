@@ -1,5 +1,4 @@
-﻿using MaterialDesignThemes.Wpf;
-using SAaMS_LW1.Helpers;
+﻿using SAaMS_LW1.Helpers;
 using SAaMS_LW1.Sequences;
 using SAaMS_LW1.ViewModels;
 using System;
@@ -34,7 +33,8 @@ namespace SAaMS_LW1
 
                 sbError.IsActive = false;
                 btnGenerate.IsEnabled = false;
-                LehmerSequence sequence = new(a, r0, m);
+                LehmerRandom random = new(a, r0, m);
+                LehmerSequence sequence = new(random);
                 IEnumerable<double> sequenceValue = await Task.Run(() => sequence.ProvideSequence());
                 btnGenerate.IsEnabled = true;
 

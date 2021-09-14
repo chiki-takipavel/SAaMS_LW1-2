@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SAaMS_LW1.Sequences
+namespace SAaMS_LW1.Sequences.Interfaces
 {
     public interface ISequence
     {

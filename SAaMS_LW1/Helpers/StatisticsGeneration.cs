@@ -1,10 +1,10 @@
-﻿using System;
+﻿using SAaMS_LW1.Helpers.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Windows;
 
 namespace SAaMS_LW1.Helpers
 {
@@ -113,7 +113,7 @@ namespace SAaMS_LW1.Helpers
             }
             catch
             {
-                throw new IOException("Please, close Excel.");
+                throw new ShowValuesException("Please, close Excel.");
             }
         }
     }
