@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SAaMS_LW1"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
         xmlns:vms="clr-namespace:SAaMS_LW1.ViewModels"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -28,7 +29,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            
+
             <materialDesign:Card 
                 Grid.Row="0"
                 Padding="16" 
@@ -56,7 +57,7 @@
                             Grid.Row="0"
                             Margin="0 0 0 6"
                             Padding="10"
-                            PreviewTextInput="FloatNumberValidation"
+                            PreviewTextInput="IntegerNumberValidation"
                             materialDesign:HintAssist.Hint="Введите a">
                         </TextBox>
                         <TextBox 
@@ -65,7 +66,7 @@
                             Margin="0 6"
                             Grid.Row="1"
                             Padding="10"
-                            PreviewTextInput="FloatNumberValidation"
+                            PreviewTextInput="IntegerNumberValidation"
                             materialDesign:HintAssist.Hint="Введите R0">
                         </TextBox>
                         <TextBox 
@@ -74,7 +75,7 @@
                             Grid.Row="2"
                             Margin="0 6 0 0"
                             Padding="10"
-                            PreviewTextInput="FloatNumberValidation"
+                            PreviewTextInput="IntegerNumberValidation"
                             materialDesign:HintAssist.Hint="Введите m">
                         </TextBox>
                     </Grid>
@@ -194,7 +195,7 @@
                             <RotateTransform Angle="90" />
                         </Separator.LayoutTransform>
                     </Separator>
-                
+
                     <Grid Grid.Column="4">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="2*"/>
@@ -203,13 +204,22 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="2*"/>
                         </Grid.RowDefinitions>
-                        
+
                         <ComboBox
                             Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                            x:Name="cmbDistribution"
+                            SelectedIndex="0"
                             Grid.Row="1"
                             Padding="10"
                             Margin="0 0 0 6"
                             materialDesign:HintAssist.Hint="Выберите распределение">
+                            <ComboBoxItem Content="По алгоритму Лемера" />
+                            <ComboBoxItem Content="Экспоненциальное" />
+                            <ComboBoxItem Content="Нормальное"/>
+                            <ComboBoxItem Content="Гамма-распределение"/>
+                            <ComboBoxItem Content="Симпсона"/>
+                            <ComboBoxItem Content="Треугольное"/>
+                            <ComboBoxItem Content="Равномерное на интервале"/>
                         </ComboBox>
                         <Button 
                             x:Name="btnGenerate"
@@ -247,6 +257,55 @@
             </lvc:CartesianChart>
         </Grid>
 
+        <materialDesign:DialogHost
+            x:Name="dlgParameters"
+            DialogOpened="DistributionParameters_DialogOpened"
+            DialogClosing="DistributionParameters_DialogClosing"
+            DialogTheme="Inherit">
+            <materialDesign:DialogHost.DialogContent>
+                <StackPanel HorizontalAlignment="Stretch" Margin="16">
+                    <TextBlock 
+                        Margin="0 0 0 8"
+                        Text="Введите параметры:"/>
+
+                    <TextBox
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        PreviewTextInput="FloatNumberValidation"
+                        Width="240"
+                        Padding="10"
+                        Margin="0 8 0 8"
+                        HorizontalAlignment="Stretch"
+                        x:Name="tbParam1">
+                    </TextBox>
+
+                    <TextBox
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        PreviewTextInput="FloatNumberValidation"
+                        Width="240"
+                        Padding="10"
+                        Margin="0 8 0 8"
+                        HorizontalAlignment="Stretch"
+                        x:Name="tbParam2">
+                    </TextBox>
+
+                    <StackPanel
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Right">
+                        <Button
+                            Style="{StaticResource MaterialDesignFlatAccentButton}"
+                            IsDefault="True"
+                            Content="OK"
+                            Margin="0 8 0 0"
+                            Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                            <Button.CommandParameter>
+                                <system:Boolean>True</system:Boolean>
+                            </Button.CommandParameter>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+        
         <materialDesign:Snackbar
             x:Name="sbError"
             HorizontalAlignment="Center">

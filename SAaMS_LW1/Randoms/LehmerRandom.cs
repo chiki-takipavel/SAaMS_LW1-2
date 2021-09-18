@@ -1,7 +1,7 @@
-﻿using SAaMS_LW1.Helpers.Interfaces;
+﻿using SAaMS_LW1.Randoms.Interfaces;
 using System;
 
-namespace SAaMS_LW1.Helpers
+namespace SAaMS_LW1.Randoms
 {
     public class LehmerRandom : IRandom
     {

@@ -43,7 +43,7 @@ namespace SAaMS_LW1.Helpers
             return Math.Sqrt(GetDispersion());
         }
 
-        public IEnumerable<float> GetDistribution()
+        public IEnumerable<float> GetHistogramDistribution()
         {
             List<float> distribution = new();
             List<double> tempRandomSequence = new(randomSequence);
@@ -58,7 +58,7 @@ namespace SAaMS_LW1.Helpers
 
             for (int i = 0; i < groupsNumber; i++)
             {
-                while ((index <= tempRandomSequence.Count - 1) && (tempRandomSequence[index] <= firstValue + interval * (i + 1)))
+                while ((index <= tempRandomSequence.Count - 1) && (tempRandomSequence[index] <= firstValue + (interval * (i + 1))))
                 {
                     if (tempRandomSequence[index] >= firstValue)
                     {

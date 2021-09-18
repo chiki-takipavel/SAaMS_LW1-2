@@ -1,4 +1,4 @@
-﻿namespace SAaMS_LW1.Helpers.Interfaces
+﻿namespace SAaMS_LW1.Randoms.Interfaces
 {
     public interface IRandom
     {

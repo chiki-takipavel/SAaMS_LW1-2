@@ -1,4 +1,4 @@
-﻿using SAaMS_LW1.Helpers.Interfaces;
+﻿using SAaMS_LW1.Randoms.Interfaces;
 using SAaMS_LW1.Sequences.Interfaces;
 using System.Collections.Generic;
 
