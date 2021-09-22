@@ -12,8 +12,10 @@ namespace SAaMS_LW1.Helpers
     {
         private const int groupsNumber = 20;
         private const string filePath = "values.csv";
-
         private readonly List<double> randomSequence;
+
+        public double MinValue => randomSequence.Min();
+        public double MaxValue => randomSequence.Max();
 
         public StatisticsGeneration(IEnumerable<double> randomSequence)
         {

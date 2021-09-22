@@ -4,6 +4,7 @@ using LiveChartsCore.Kernel;
 using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Drawing;
 using LiveChartsCore.SkiaSharpView.Drawing.Geometries;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace SAaMS_LW1.ViewModels
             YAxes = new ObservableCollection<Axis> { new Axis() };
         }
 
-        public void CreateChart(params IEnumerable<float>[] values)
+        public void CreateChart((double minValue, double maxValue) xValuesRange, params IEnumerable<float>[] values)
         {
             Series.Clear();
             XAxes.Clear();
@@ -32,17 +33,22 @@ namespace SAaMS_LW1.ViewModels
 
             var maxCountSeries = values.OrderByDescending(x => x.Count()).First();
             var groupsCount = maxCountSeries.Count();
-            var maxLimit = maxCountSeries.Max();
+
+            var minXLimit = xValuesRange.minValue >= 0 ? Math.Floor(xValuesRange.minValue) : Math.Ceiling(xValuesRange.minValue);
+            var maxXLimit = xValuesRange.maxValue >= 0 ? Math.Ceiling(xValuesRange.maxValue) : Math.Floor(xValuesRange.maxValue);
+            var intervalSize = (maxXLimit - minXLimit) / groupsCount;
+
+            var maxYLimit = maxCountSeries.Max();
 
             XAxes.Add(new Axis
             {
-                Labeler = value => string.Format("{0:0.0#}", value / groupsCount)
+                Labeler = value => $"{minXLimit + (intervalSize * value):0.0#}"
             });
 
             YAxes.Add(new Axis
             {
                 MinLimit = 0,
-                MaxLimit = maxLimit
+                MaxLimit = maxYLimit
             });
 
             foreach (var value in values)

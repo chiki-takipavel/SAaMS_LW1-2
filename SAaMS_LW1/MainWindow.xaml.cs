@@ -52,7 +52,7 @@ namespace SAaMS_LW1
             tblCheck.Text = statistics.GetChecked().ToString(CultureInfo.CurrentCulture);
 
             ChartViewModel chart = (ChartViewModel)DataContext;
-            chart.CreateChart(statistics.GetHistogramDistribution());
+            chart.CreateChart((statistics.MinValue, statistics.MaxValue), statistics.GetHistogramDistribution());
 
             await Task.Delay(1500);
             statistics.ShowValues();
