@@ -66,7 +66,7 @@ namespace SAaMS_LW1
 
         private void FloatNumberValidation(object sender, TextCompositionEventArgs e)
         {
-            Regex regex = new(@"^[0-9\,]$");
+            Regex regex = new(@"^[0-9\,\-]$");
             e.Handled = !regex.IsMatch(e.Text);
         }
 
