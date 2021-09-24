@@ -11,7 +11,7 @@ namespace SAaMS_LW1.Helpers.Extensions
 
             foreach (double value in sequence)
             {
-                resultSequence.Add(Math.Abs(Math.Log(value) / lambda));
+                resultSequence.Add(-Math.Log(value) / lambda);
             }
 
             return resultSequence;
@@ -26,12 +26,12 @@ namespace SAaMS_LW1.Helpers.Extensions
             foreach (double _ in sequence)
             {
                 double r = 1;
-                for (int index = 0; index <= Math.Floor(eta); index++)
+                for (int index = 0; index < Math.Floor(eta); index++)
                 {
                     r *= sequence[random.Next(maxRandomValue)];
                 }
 
-                resultSequence.Add(-Math.Abs(Math.Log(r) / lambda));
+                resultSequence.Add(-Math.Log(r) / lambda);
             }
 
             return resultSequence;
